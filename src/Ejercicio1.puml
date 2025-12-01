@@ -6,7 +6,7 @@ class Autor{
 - nacionalidad : String
 - fechaNacimiento : Date
 + escribir() : void
-+ getNombreCompleto() : String {derived}
++ getNombreCompleto(nombre:String,apellido:String) : String {derived}
 
 }
 
