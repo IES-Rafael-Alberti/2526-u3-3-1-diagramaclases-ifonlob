@@ -19,7 +19,7 @@ class Cuenta{
     - numero : Int
     - saldo : Double
     + recargarSaldo(saldo : Double) : void
-    + comprar(saldo : Double)
+    + comprar(saldo : Double) : void
 }
 
 class TarjetaCredito{
@@ -41,11 +41,13 @@ class Pedido{
 }
 
 class PedidoSimple{
-
+ + agregarProducto(producto : Producto,cantidad : Int) : void
+ + calcularCosto() : Double
 }
 
 class PedidoCompuesto{
-
+    + agregarPedido(pedido : Pedido) : void
+    + calcularCostoTotal() : Double
 }
 
 enum estadoPedido{
