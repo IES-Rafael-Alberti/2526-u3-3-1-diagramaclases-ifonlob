@@ -1,0 +1,50 @@
+@startuml
+
+enum NivelCurso {
+  GRADO
+  MASTER
+  DOCTORADO
+}
+
+class Curso{
+    - codigo : Int
+    - nombre : String
+    - descripcion : String
+    - costoCreditos : Int
+    - nivel : NivelCurso
+    + obtenerNumeroEstudiantes() : Int
+}
+
+class Profesor{
+    - identificador : Int
+    - nombre : String
+    - correoCorporativo : String
+    - departamento : String
+    + impartirClase() : void
+    + prepararExamenes() : void
+    + evaluarEstudiantes() : void
+
+}
+
+class Estudiante{
+    - numeroExpediente : Int
+    - nombre : String
+    - correo : String
+    + matricularse() : void
+    + asistirClase() : void
+    + estudiar() : void
+    + presentarseExamen() : void
+
+}
+
+class Matricula{
+    - fechaMatriculacion : Date
+    - nota: Double
+}
+
+Profesor "1" -- "0..*" Curso : imparte 
+
+Estudiante "1" -- "0..*" Matricula : matricula
+
+Matricula "0..*" -- "1" Curso : tiene
+@enduml

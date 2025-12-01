@@ -1,0 +1,63 @@
+@startuml
+
+enum tipoEmpleado{
+    SUPERVISOR
+    JEFE
+    GERENTE
+}
+
+class Persona{
+    - nombre : String
+    - fechaNacimiento : Date
+    + calcularEdad() : Int {derived}
+}
+
+class Empleado{
+    - sueldoBruto : Double
+    + calcularSueldo() : Double {derived}
+
+}
+
+class Cliente{
+    - numeroTelefono : String
+
+}
+
+class Empresa{
+    - cif : String
+    - nombreCorporativo : String
+    - direccionFiscal : String
+}
+
+class EmpleadoNormal{
+
+}
+
+
+class EmpleadoResponsable{
+    - tipo : tipoEmpleado
+
+}
+
+
+Cliente "0..*" -- "1..*" Empresa : pertenece
+
+Persona <|-- Cliente
+
+Persona <|-- Empleado
+
+Empleado <|-- EmpleadoNormal
+
+Empleado <|-- EmpleadoResponsable
+
+
+EmpleadoResponsable "1" -- "0..*" EmpleadoNormal : se encarga
+
+note right of Persona
+El método calcularEdad() calcula la edad a partir de PERSONA.fechaNacimiento.
+end note
+
+note right of Empleado
+El método calcularSueldo() utiliza la fórmula : sueldoNeto = sueldoBruto * 0.78 aunque puede depender del rango del Empleado
+end note
+@enduml

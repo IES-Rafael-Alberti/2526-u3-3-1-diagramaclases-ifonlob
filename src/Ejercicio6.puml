@@ -1,0 +1,56 @@
+@startuml
+
+enum libroTipo{
+    NOVELA
+    POESIA
+    CUENTO
+}
+
+enum libroEstado{
+    DISPONIBLE
+    PRESTADO
+    RETRASADO
+}
+
+class Autor{
+    - nombre : String
+    - fechaNacimiento : Date
+    + calcularEdad() : Int {derived}
+
+}
+
+class Libro{
+    - titulo : String
+    - tipo : libroTipo
+    - estado : libroEstado
+    - isbn : String
+    + cambiarEstado(nuevoEstado : libroEstado) : void
+
+}
+
+
+class Prestamo{
+    -fechaPrestamo : Date
+    + calcularFechaLimite() : Date {derived}
+}
+
+
+class Socio{ 
+    - nombre : String
+    - dni : String
+    - fechaInscripcion : Date
+    - librosPrestados() : Int
+    - multaActiva() : Boolean
+    - fechaUltimaMulta : Date
+    + devolverLibro() : void
+    + calcularTiempoRestanteMulta() : Int {derived}
+    + prestarLibro() : void {restriccion : Un socio sólo puede encargar un libro si SOCIO.multaActiva = False y como máximo 3}
+}
+
+
+note right of Prestamo
+El método calcularFechaLimite() calcula la fecha límite de la siguiente forma: fechaLimite = fechaPrestamo + 30
+end note
+note right of Socio
+El método calcularTiempoRestanteMulta() calcula el tiempo restante de la multa a partir de SOCIO.fechaUltimaMulta()
+@enduml
