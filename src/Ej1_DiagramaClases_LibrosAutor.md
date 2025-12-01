@@ -39,9 +39,6 @@
 | :-- | :-- | :-- | :-- | :-- | :-- | :-- |
 | Asociación | Autor | autor | 1 | Libro | escribe | 0..* |
 
-(La cardinalidad “1 Autor por Libro” se expresa en el extremo de Autor cuando dibujas desde Libro, aunque en tu diagrama lo has puesto como `Autor "1" --> "0..*" Libro`.)
-
-
 
 ## Decisiones de Diseño
 
