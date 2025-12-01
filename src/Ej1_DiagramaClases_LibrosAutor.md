@@ -18,7 +18,7 @@
         - `getTitulo() : String`
         - `getPrecio() : Double`
 
-***
+
 
 ## Análisis de Relaciones
 
@@ -26,12 +26,12 @@
 
 - Nombre de la relación (rol en Autor → Libro): **“escribe”**.
 - Cardinalidades:
-    - Un **Autor** escribe **0..*** Libros (puede no tener libros aún, o varios).
+    - Un **Autor** escribe 0..* Libros (puede no tener libros aún, o varios).
     - Cada **Libro** es escrito por **1** Autor.
 - Justificación:
     - El enunciado dice “Un Autor escribe uno o varios Libros” y “Cada Libro es escrito por un único Autor”.
 
-***
+
 
 ## Tabla de Roles y Cardinalidades
 
@@ -41,7 +41,7 @@
 
 (La cardinalidad “1 Autor por Libro” se expresa en el extremo de Autor cuando dibujas desde Libro, aunque en tu diagrama lo has puesto como `Autor "1" --> "0..*" Libro`.)
 
-***
+
 
 ## Decisiones de Diseño
 
@@ -62,7 +62,7 @@
 - El enunciado simplifica el modelo a un solo autor por libro, aunque en la realidad pueda haber varios.
 - Se refleja con la cardinalidad 1 en Autor desde el punto de vista de Libro.
 
-***
+
 
 ## Código PlantUML
 
