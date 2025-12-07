@@ -119,6 +119,7 @@ class Libro(
     private val isbn: Int,
     private val numeroPaginas: Int,
     private var precio: Double
+    private val autor : Autor
 ) {
     fun leer() {
     }
