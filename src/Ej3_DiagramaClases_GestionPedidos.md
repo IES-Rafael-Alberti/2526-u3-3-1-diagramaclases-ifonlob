@@ -188,12 +188,106 @@ end note
 @enduml
 ```
 
+## Código Kotlin
 
-## Conceptos Clave de UML Aplicados
+```kotlin
+enum class EstadoPedido {
+    PENDIENTE,
+    COBRADO,
+    DISTRIBUCION,
+    CONFIRMADO
+}
 
-1. **Composite**: PedidoCompuesto puede contener otros pedidos (simples o compuestos).
-2. **Singleton**: ProcesadorCobros único para toda la gestión de cobros.
-3. **Clase de Asociación**: LineaPedido une Pedido y Producto incluyendo atributos extra.
-4. **Restricciones de negocio**: En pedidos, en stock, en saldos.
-5. **Generalización**: Pedido es la clase base común.
-6. **Encapsulación**: Todos los atributos privados, métodos públicos.
+class Cliente(
+    private val nombre: String,
+    private val direccionEnvio: String,
+    private val telefono: Int,
+    private val correo: String
+) {
+    private val cuentas: MutableList<Cuenta> = mutableListOf()
+}
+
+class Producto(
+    private val codigo: Int,
+    private val stock: Int,
+    private val nombre: String,
+    private val descripcion: String,
+    private val pvp: Double
+)
+
+class Cuenta(
+    private val numero: Int,
+    private var saldo: Double,
+    private val cliente: Cliente
+) {
+    private val pedidos: MutableList<Pedido> = mutableListOf()
+    private var tarjetaCredito: TarjetaCredito
+
+    fun recargarSaldo() {
+    }
+
+    fun comprar() {
+    }
+}
+
+class TarjetaCredito(
+    private val numero: Int,
+    private var saldo: Double,
+    private val fechaVencimiento: java.util.Date,
+    private val cuenta: Cuenta
+)
+
+open class Pedido(
+    private val estado: EstadoPedido,
+    private val costo: Int,
+    private val numero: Int,
+    private val cuenta: Cuenta
+) {
+    protected val lineas: MutableList<LineaPedido> = mutableListOf()
+}
+
+class LineaPedido(
+    private val cantidad: Int,
+    private val precioProducto: Double,
+    private val producto: Producto,
+    private val pedido: Pedido
+)
+
+class PedidoSimple(
+    estado: EstadoPedido,
+    costo: Int,
+    numero: Int,
+    cuenta: Cuenta
+) : Pedido(estado, costo, numero, cuenta) {
+
+    fun agregarProducto(producto: Producto, cantidad: Int) {
+    }
+
+    fun calcularCosto(): Double {
+        return 0.0
+    }
+}
+
+class PedidoCompuesto(
+    estado: EstadoPedido,
+    costo: Int,
+    numero: Int,
+    cuenta: Cuenta
+) : Pedido(estado, costo, numero, cuenta) {
+
+    private val pedidos: MutableList<Pedido> = mutableListOf()
+
+    fun agregarPedido(pedido: Pedido) {
+    }
+
+    fun calcularCostoTotal(): Double {
+        return 0.0
+    }
+}
+
+object ProcesadorCobros {
+    fun realizarRevision(estado: EstadoPedido) {
+    }
+}
+
+```
