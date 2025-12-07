@@ -190,13 +190,83 @@ end note
 @enduml
 ```
 
+## Código en Kotlin
+```kotlin
+enum class TipoSuperficie {
+    CESPED,
+    TIERRA_BATIDA,
+    PISTA_DURA
+}
 
-## Conceptos Clave de UML Aplicados
+enum class ResultadoPartido {
+    LOCAL,
+    VISITANTE
+}
+class Equipo(
+    private val nombre: String,
+    private val pais: String
+) {
+    private val jugadores: MutableList<Jugador> = mutableListOf()
+}
 
-1. **Herencia y clase abstracta**: Partido abstracta con subclases específicas (Individual/Dobles).
-2. **Enumeraciones**: tipoSuperficie y ResultadoPartido.
-3. **Composición fuerte**: Eliminatoria compuesta exactamente por 5 Partidos.
-4. **Restricciones de equipo**: Máximo 5 jugadores por equipo.
-5. **Roles y cardinalidades**: local/visitante, parejas local/visitante, jugadorLocal/jugadorVisitante.
-6. **Métodos derivados y de negocio**: calcularPartidosGanados(), calcularResultadoGlobal().
-7. **Notas UML**: Documentan reglas de negocio (tipos de partido por número, ganador debe ser participante).
+class Jugador(
+    private val nombre: String,
+    private val posicionRanking: Int,
+    private val fechaNacimiento: java.util.Date,
+    private val nacionalidad: String
+) {
+    fun calcularPartidosGanados(): Int {
+        return 0
+    }
+}
+
+class Pareja(
+    private val jugador1: Jugador,
+    private val jugador2: Jugador
+)
+
+class Sede(
+    private val nombre: String,
+    private val ciudad: String,
+    private val pais: String
+)
+
+class Eliminatoria(
+    private val superficie: TipoSuperficie,
+    private val equipoLocal: Equipo,
+    private val equipoVisitante: Equipo,
+    private val sede: Sede
+) {
+    private val partidos: MutableList<Partido> = mutableListOf()
+
+    fun calcularResultadoGlobal(): ResultadoPartido {
+        return ResultadoPartido.LOCAL
+    }
+}
+
+abstract class Partido(
+    private val numero: Int,
+    private val marcador: String,
+    protected var resultadoGlobal: ResultadoPartido
+)
+
+class PartidoIndividual(
+    numero: Int,
+    marcador: String,
+    resultadoGlobal: ResultadoPartido,
+    private val jugadorLocal: Jugador,
+    private val jugadorVisitante: Jugador,
+    private val ganador: Jugador
+) : Partido(numero, marcador, resultadoGlobal)
+
+
+class PartidoDobles(
+    numero: Int,
+    marcador: String,
+    resultadoGlobal: ResultadoPartido,
+    private val parejaLocal: Pareja,
+    private val parejaVisitante: Pareja,
+    private val parejaGanadora: Pareja
+) : Partido(numero, marcador, resultadoGlobal)
+
+```
