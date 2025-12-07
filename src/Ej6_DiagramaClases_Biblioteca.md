@@ -117,7 +117,7 @@ class Socio{
     + prestarLibro(libro : Libro) : void {restriccion : Un socio sólo puede encargar un libro si SOCIO.multaActiva = False y como máximo 3}
 }
 
-Libro "1" -- "1..*" Autor : escrito por
+Libro "1..*" -- "1" Autor : escrito por
 
 Socio "1" -- "0..3" Prestamo : tiene
 
@@ -133,12 +133,82 @@ note right of Socio
 @enduml
 
 ```
-## Conceptos Clave de UML Aplicados
+## Código en Kotlin
+```kotlin
+enum class LibroTipo {
+    NOVELA,
+    POESIA,
+    CUENTO
+}
 
-1. **Enumeraciones**: LibroTipo y LibroEstado.
-2. **Clase de Asociación**: Préstamo entre Socio y Libro, con fechaPrestamo como dato propio.
-3. **Encapsulación**: Visibilidad adecuada, métodos públicos.
-4. **Restricciones de negocio**: Modeladas en métodos y cardinalidades.
-5. **Atributos/Métodos derivados**: Edad del autor, fecha límite de préstamo, tiempo de multa.
-6. **Validación de métodos**: En prestarLibro y devolverLibro.
-7. **Estados**: Controlados por atributos y operaciones sobre libroEstado.
+enum class LibroEstado {
+    DISPONIBLE,
+    PRESTADO,
+    RETRASADO
+}
+
+class Autor(
+    private val nombre: String,
+    private val fechaNacimiento: java.util.Date
+) {
+
+    private val libros: MutableList<Libro> = mutableListOf()
+
+    fun calcularEdad(): Int {
+        return 0
+    }
+}
+
+class Libro(
+    private val titulo: String,
+    private val tipo: LibroTipo,
+    private var estado: LibroEstado,
+    private val isbn: String
+    private var autor: Autor
+) {
+
+    fun cambiarEstado(nuevoEstado: LibroEstado) {
+    }
+}
+
+class Prestamo(
+    private val fechaPrestamo: java.util.Date,
+    private val libro: Libro,
+    private val socio: Socio
+) {
+    fun calcularFechaLimite(): java.util.Date {
+        return java.util.Date()
+    }
+}
+
+class Multa(
+    private val fechaInicio: java.util.Date,
+    private val diasMulta: Int
+)
+
+class Socio(
+    private val nombre: String,
+    private val dni: String,
+    private val fechaInscripcion: java.util.Date
+) {
+    private val prestamos: MutableList<Prestamo> = mutableListOf()
+
+    private fun librosPrestados(): Int {
+        return 0
+    }
+
+    private fun multaActiva(): Boolean {
+        return false
+    }
+
+    fun devolverLibro(prestamo: Prestamo) {
+    }
+
+    fun calcularTiempoRestanteMulta(multa: Multa): Int {
+        return 0
+    }
+
+    fun prestarLibro(libro: Libro) {
+    }
+}
+```
