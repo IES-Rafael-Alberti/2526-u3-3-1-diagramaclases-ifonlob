@@ -133,11 +133,67 @@ end note
 @enduml
 ```
 
-## Conceptos Clave de UML Aplicados
+## Código Kotlin
 
-1. **Herencia**: Factorización de datos comunes en Persona.
-2. **Especialización**: Subtipos de Empleado (Normal/Responsable).
-3. **Encapsulación**: Atributos privados, métodos públicos.
-4. **Métodos derivados**: Edad y sueldo neto calculados.
-5. **Asociación reflexiva**: Jerarquía en EmpleadoResponsable.
-6. **Restricciones**: Cliente debe pertenecer a al menos una empresa.
+```kotlin
+enum class TipoEmpleado {
+    SUPERVISOR,
+    JEFE,
+    GERENTE
+}
+
+abstract class Persona(
+    private val nombre: String,
+    private val fechaNacimiento: java.util.Date
+) {
+    abstract fun calcularEdad(): Int
+}
+
+abstract class Empleado(
+    private val sueldoBruto: Double,
+) : Persona(
+    nombre = "",
+    fechaNacimiento = java.util.Date()
+) {
+    abstract fun calcularSueldo(): Double
+}
+
+class Cliente(
+    private val numeroTelefono: String,
+    nombre: String,
+    fechaNacimiento: java.util.Date
+) : Persona(nombre, fechaNacimiento) {
+
+    private val empresas: MutableList<Empresa> = mutableListOf()
+}
+
+class Empresa(
+    private val cif: String,
+    private val nombreCorporativo: String,
+    private val direccionFiscal: String
+) {
+    private val clientes: MutableList<Cliente> = mutableListOf()
+}
+
+class EmpleadoNormal(
+    sueldoBruto: Double,
+    nombre: String,
+    fechaNacimiento: java.util.Date
+) : Empleado(sueldoBruto) {
+}
+
+class EmpleadoResponsable(
+    private val tipo: TipoEmpleado,
+    sueldoBruto: Double,
+    nombre: String,
+    fechaNacimiento: java.util.Date
+) : Empleado(sueldoBruto) {
+    private val empleadosACargo: MutableList<Empleado> = mutableListOf()
+}
+
+
+
+
+
+
+```
