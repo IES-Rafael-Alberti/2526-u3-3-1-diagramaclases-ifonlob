@@ -99,16 +99,18 @@ end note
 
 ```kotlin
 class Autor(
-  private val nombre: String,
-  private val apellido: String,
-  private val nacionalidad: String,
-  private val fechaNacimiento: java.util.Date
-){
-  private val libros: MutableList<Libro> = mutableListOf()
+    private val nombre: String,
+    private val apellido: String,
+    private val nacionalidad: String,
+    private val fechaNacimiento: java.util.Date
+) {
+    private val libros: MutableList<Libro> = mutableListOf()
 
-  fun escribir(libro: Libro) {
+    fun escribir() {
     }
-   fun getNombreCompleto(): String {
+
+    fun getNombreCompleto(): String {
+        return ""
     }
 }
 
@@ -117,15 +119,17 @@ class Libro(
     private val isbn: Int,
     private val numeroPaginas: Int,
     private var precio: Double
-){
-  fun leer() {
+) {
+    fun leer() {
     }
-  fun getTitulo(): String {
-      return ""
+
+    fun getTitulo(): String {
+        return ""
     }
-  fun getPrecio(): Double {
+
+    fun getPrecio(): Double {
+        return 0.0
     }
 }
-
 
 ```
