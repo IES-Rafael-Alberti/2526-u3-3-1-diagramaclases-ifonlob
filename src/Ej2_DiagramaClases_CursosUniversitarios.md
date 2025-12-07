@@ -154,3 +154,73 @@ Matricula "0..*" -- "1" Curso : tiene
 
 @enduml
 ```
+
+## Código Kotlin
+```kotlin
+
+enum class NivelCurso {
+    GRADO,
+    MASTER,
+    DOCTORADO
+}
+
+class Curso(
+    private val codigo: Int,
+    private val nombre: String,
+    private val descripcion: String,
+    private val creditos: Int,
+    private val nivel: NivelCurso,
+    private val profesor: Profesor
+) {
+    private val matriculas: MutableList<Matricula> = mutableListOf()
+
+    fun obtenerNumeroEstudiantes(): Int {
+        return 0
+    }
+
+    fun getProfesor(): Profesor {
+        return profesor
+    }
+}
+
+class Profesor(
+    private val identificador: Int,
+    private val nombre: String,
+    private val correoCorporativo: String,
+    private val departamento: String
+) {
+    private val cursos: MutableList<Curso> = mutableListOf()
+
+    fun impartirClase() { }
+
+    fun prepararExamenes() { }
+
+    fun evaluarEstudiantes() { }
+}
+
+class Estudiante(
+    private val numeroExpediente: Int,
+    private val nombre: String,
+    private val correo: String,
+    private val fechaMatriculacionUniversidad: java.util.Date
+) {
+    private val matriculas: MutableList<Matricula> = mutableListOf()
+
+    fun matricularse() { }
+
+    fun asistirClase() { }
+
+    fun estudiar() { }
+
+    fun presentarseExamen() { }
+}
+
+class Matricula(
+    private val fechaMatriculacion: java.util.Date,
+    private val nota: Double,
+    private val curso: Curso,
+    private val estudiante: Estudiante
+)
+
+
+```
