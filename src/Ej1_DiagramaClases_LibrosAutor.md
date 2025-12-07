@@ -94,3 +94,38 @@ end note
 
 @enduml
 ```
+
+### Código Kotlin
+
+```kotlin
+class Autor(
+  private val nombre: String,
+  private val apellido: String,
+  private val nacionalidad: String,
+  private val fechaNacimiento: java.util.Date
+){
+  private val libros: MutableList<Libro> = mutableListOf()
+
+  fun escribir(libro: Libro) {
+    }
+   fun getNombreCompleto(): String {
+    }
+}
+
+class Libro(
+    private val titulo: String,
+    private val isbn: Int,
+    private val numeroPaginas: Int,
+    private var precio: Double
+){
+  fun leer() {
+    }
+  fun getTitulo(): String {
+      return ""
+    }
+  fun getPrecio(): Double {
+    }
+}
+
+
+```
