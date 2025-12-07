@@ -118,8 +118,57 @@ end note
 @enduml
 ```
 
-## Conceptos Clave Aplicados
+## Código en Kotlin
+```kotlin
+class Pelicula(
+    private val titulo: String,
+    private val anioEstreno: Int,
+    private val duracion: Int,
+    private val idiomaOriginal: String,
+    private val director: Director
+) {
+    private val participaciones: MutableList<Participacion> = mutableListOf()
 
-1. **Herencia**: Una Persona puede ser Actor o Director.
-2. **Clase de Asociación**: Participacion permite relación N:M entre Actor y Pelicula, añadiendo el papel.
-3. **Cardinalidades**: Una película tiene 1 director, 1..* actores y los actores pueden estar en múltiples películas.
+    fun agregarActor(actor: Actor, papel: String) {
+    }
+
+    fun getDirector(): Director {
+        return director
+    }
+}
+
+abstract class Persona(
+    private val nombre: String,
+    private val fechaNacimiento: java.util.Date,
+    private val nacionalidad: String
+) {
+    abstract fun calcularEdad(): Int
+}
+
+class Actor(
+    nombre: String,
+    fechaNacimiento: java.util.Date,
+    nacionalidad: String
+) : Persona(nombre, fechaNacimiento, nacionalidad) {
+
+    fun getPeliculasActuadas(): List<Pelicula> {
+        return emptyList()
+    }
+}
+
+class Director(
+    nombre: String,
+    fechaNacimiento: java.util.Date,
+    nacionalidad: String
+) : Persona(nombre, fechaNacimiento, nacionalidad) {
+
+    fun getPeliculasDirigidas(): List<Pelicula> {
+        return emptyList()
+    }
+}
+class Participacion(
+    private val papel: String,
+    private val actor: Actor,
+    private val pelicula: Pelicula
+)
+```
